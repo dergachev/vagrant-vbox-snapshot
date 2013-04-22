@@ -12,12 +12,17 @@ Ensure you have Vagrant 1.1+ installed, then run:
 
 The following commands are added by this plugin:
 
-     vagrant snap back                   # back to current snapshot
-     vagrant snap delete SNAP_NAME       # delete snapshot
-     vagrant snap go SNAP_NAME           # go to specified snapshot
-     vagrant snap help [COMMAND]         # Describe subcommands or one specific subcommand
-     vagrant snap list                   # list snapshot
-     vagrant snap take [NAME]            # take snapshot
+     vagrant snapshot take [NAME]            # take snapshot, labeled by NAME
+     vagrant snapshot list                   # list snapshots
+     vagrant snapshot back                   # restore last taken snapshot
+     vagrant snapshot delete SNAP_NAME       # delete specified snapshot
+     vagrant snapshot go SNAP_NAME           # restore specified snapshot
+
+## Caveats
+
+* Not compatible with Vagrant <1.1. If you need this, try [another solution](#other-solutions).
+* Does not support multiple VMs. (Pull requests encouraged).
+* Only minimally tested.
 
 ## Other solutions
 

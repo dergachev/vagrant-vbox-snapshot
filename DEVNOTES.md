@@ -3,6 +3,7 @@
 Resources:
 
 * http://docs.vagrantup.com/v2/plugins/development-basics.html
+* http://railscasts.com/episodes/245-new-gem-with-bundler?view=asciicast (Gem tutorial)
 
 Example code:
 

@@ -15,13 +15,13 @@ The following commands are added by this plugin:
      vagrant snapshot take [NAME]            # take snapshot, labeled by NAME
      vagrant snapshot list                   # list snapshots
      vagrant snapshot back                   # restore last taken snapshot
-     vagrant snapshot delete SNAP_NAME       # delete specified snapshot
-     vagrant snapshot go SNAP_NAME           # restore specified snapshot
+     vagrant snapshot delete [NAME]          # delete specified snapshot
+     vagrant snapshot go [NAME]              # restore specified snapshot
 
 ## Caveats
 
 * Not compatible with Vagrant <1.1. If you need this, try [another solution](#other-solutions).
-* Does not support multiple VMs. (Pull requests encouraged).
+* Does not support multiple VMs. Pull requests encouraged.
 * Only minimally tested.
 
 ## Other solutions

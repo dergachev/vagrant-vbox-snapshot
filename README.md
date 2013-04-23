@@ -26,13 +26,10 @@ The following commands are added by this plugin:
 
 ## Other solutions
 
-There have been a number of similar plugins, but none worked for Vagrant 1.1:
+This plugin is primarily a port of vagrant-snap to Vagrant 1.1.
 
 * [vagrant-snap](https://github.com/t9md/vagrant-snap)
-  - originally published as a gist: https://gist.github.com/t9md/1008031
-  - fork of above gist, with Vagrant 1.0.6 compatibility: https://gist.github.com/tombh/5142237 
-    - [source](https://github.com/mitchellh/vagrant/issues/143#issuecomment-14781762)
-    - primary inspiration for vagrant-vbox-snapshot
+  - fork with Vagrant 1.0.4-1.0.7 compatibility: https://gist.github.com/tombh/5142237 [source](https://github.com/mitchellh/vagrant/issues/143#issuecomment-14781762)
 * [sahara](https://github.com/jedi4ever/sahara)
   - fork exists with 1.1 functionality: https://github.com/ryuzee/sahara
 

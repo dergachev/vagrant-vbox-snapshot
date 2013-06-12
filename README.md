@@ -35,5 +35,25 @@ This plugin is primarily a port of vagrant-snap to Vagrant 1.1.
 
 ## Development
 
+To develop on this plugin, do the following:
+
+```
+# get the repo, and then make a feature branch (REPLACE WITH YOUR FORK)
+git clone https://github.com/dergachev/vagrant-vbox-snapshot.git
+cd vagrant-vbox-snapshot
+git checkout -b MY-NEW-FEATURE
+
+# installs the vagrant gem, which is a dev dependency
+bundle install 
+
+# hack on the plugin
+vim lib/vagrant-vbox-snapshot.rb # or any other file
+
+# test out your changes, in the context provided by the development vagrant gem, and the local Vagrantfile.
+bundle exec vagrant snapshot ...
+
+# commit, push, and do a pull-request
+```
+
 See [DEVNOTES.md](https://github.com/dergachev/vagrant-vbox-snapshot/blob/master/DEVNOTES.md)
 for the notes I compiled while developing this plugin.

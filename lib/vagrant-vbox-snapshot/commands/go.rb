@@ -1,5 +1,3 @@
-require 'pp'
-
 module VagrantPlugins
   module VBoxSnapshot
     module Command
@@ -38,9 +36,7 @@ module VagrantPlugins
             opts.separator ""
             opts.separator "Usage: vagrant snapshot go <SNAPSHOT_NAME>"
 
-            # build_snapshot_options(opts, options)
-
-            opts.on("-r", "--reload", "reconfigure restored machine config (eg. shared folders) is consistent with Vagrantfile. (slower)") do |reload|
+            opts.on("-r", "--reload", "Runs 'vagrant reload --no-provision' after restoring snapshot to ensure Vagrantfile config is applied.") do |reload|
               options[:reload] = reload
             end
 

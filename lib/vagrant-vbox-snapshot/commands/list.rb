@@ -14,7 +14,7 @@ module VagrantPlugins
           argv = parse_options(opts)
           return if !argv
 
-          with_target_vms do |machine|
+          with_target_vms(argv, single_target: true) do |machine|
             vm_id = machine.id
             system "VBoxManage snapshot #{vm_id} list --details"
           end

@@ -1,7 +1,11 @@
+require_relative 'multi_vm_args'
+
 module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Take < Vagrant.plugin(2, :command)
+        include MultiVmArgs
+
         def execute
           options = {}
 
@@ -14,12 +18,8 @@ module VagrantPlugins
           argv = parse_options(opts)
           return if !argv
 
-          unless [1, 2].include?(argv.size)
-            @env.ui.info(opts.help, :prefix => false)
-            return
-          end
-
-          vm_name, snapshot_name = (argv.size == 1 ? [nil, argv[1]] : [argv[0], argv[1]])
+          vm_name, snapshot_name = parse_vm_and_snapshot_options(argv)
+          return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|
             vm_id = machine.id

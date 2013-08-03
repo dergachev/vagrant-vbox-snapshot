@@ -1,7 +1,11 @@
+require_relative 'multi_vm_args'
+
 module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Go < Vagrant.plugin(2, :command)
+        include MultiVmArgs
+
         def get_shared_folders(vm_id)
           shared_folders = []
           info = `VBoxManage showvminfo #{vm_id} --machinereadable`
@@ -34,7 +38,7 @@ module VagrantPlugins
           opts = OptionParser.new do |opts|
             opts.banner = "Go to specified snapshot"
             opts.separator ""
-            opts.separator "Usage: vagrant snapshot go <SNAPSHOT_NAME>"
+            opts.separator "Usage: vagrant snapshot go [vm-name] <SNAPSHOT_NAME>"
 
             opts.on("-r", "--reload", "Runs 'vagrant reload --no-provision' after restoring snapshot to ensure Vagrantfile config is applied.") do |reload|
               options[:reload] = reload
@@ -45,17 +49,14 @@ module VagrantPlugins
           argv = parse_options(opts)
           return if !argv
 
-          if !argv[0]
-            @env.ui.info(opts.help, :prefix => false)
-            return
-          end
+          vm_name, snapshot_name = parse_vm_and_snapshot_options(argv)
+          return if !snapshot_name
 
-          with_target_vms do |machine|
+          with_target_vms(vm_name, single_target: true) do |machine|
             vm_id = machine.id
-            snapshot_name = argv[0]
 
             before_restore(vm_id)
-            
+
             system "VBoxManage controlvm #{vm_id} poweroff"
             system "VBoxManage snapshot #{vm_id} restore #{snapshot_name}"
 

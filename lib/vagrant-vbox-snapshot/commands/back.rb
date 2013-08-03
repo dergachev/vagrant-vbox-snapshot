@@ -8,13 +8,13 @@ module VagrantPlugins
           opts = OptionParser.new do |opts|
             opts.banner = "Back to current snapshot"
             opts.separator ""
-            opts.separator "Usage: vagrant snapshot back"
+            opts.separator "Usage: vagrant snapshot back [vm-name]"
           end
           # Parse the options
           argv = parse_options(opts)
           return if !argv
 
-          with_target_vms do |machine|
+          with_target_vms(argv, single_target: true) do |machine|
             vm_id = machine.id
             system "VBoxManage snapshot #{vm_id} list --details"
             system "VBoxManage controlvm #{vm_id} poweroff"

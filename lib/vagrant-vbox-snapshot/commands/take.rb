@@ -18,7 +18,7 @@ module VagrantPlugins
           argv = parse_options(opts)
           return if !argv
 
-          vm_name, snapshot_name = parse_vm_and_snapshot_options(argv)
+          vm_name, snapshot_name = parse_vm_and_snapshot_options(argv, opts)
           return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|

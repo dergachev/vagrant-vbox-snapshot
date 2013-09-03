@@ -26,3 +26,43 @@ Vagrant source code:
 ## other ideas related to snapshots
 
 * http://code.chrisroberts.org/blog/2012/05/09/cooking-up-partial-run-lists-with-chef/
+
+## Reviewing a pull request
+
+```
+git clone https://github.com/dergachev/vagrant-vbox-snapshot.git
+cd vagrant-vbox-snapshot
+# consider branching if you aren't sure about merging it (not the case here, of course!)
+# git checkout dubious-pull-request
+git pull https://github.com/fgrehm/vagrant-vbox-snapshot multi-vm-environments-support
+# test, fix stuff, etc
+git push -u origin master
+```
+
+## Pushing out a new release of the gem
+
+```
+# make commits
+# consider creating/updating CHANGELOG.txt
+vim lib/vagrant-vbox-snapshot/version.rb +/VERSION # increment version counter, eg to 0.0.3
+gem build vagrant-vbox-snapshot.gemspec # creates vagrant-vbox-snapshot-0.0.3.gem
+
+# test the gem locally, in a random vagrant project
+cd ~/code/screengif
+vagrant plugin uninstall vagrant-vbox-snapshot
+vagrant plugin install ~/code/vagrant-vbox-snapshot/vagrant-vbox-snapshot-0.0.3.gem
+# test it out, ensure basic sanity, eg for 0.0.3:
+vagrant snapshot list -h
+# cleanup
+vagrant plugin uninstall
+
+cd ~/code/vagrant-vbox-snapshot/
+gem push vagrant-vbox-snapshot-0.0.3.gem
+git tag 0.0.3
+git push --tags
+
+# test installing from rubygems
+cd ~/code/screengif
+vagrant plugin install vagrant-vbox-snapshot
+vagrant plugin list
+```

@@ -27,6 +27,26 @@ Vagrant source code:
 
 * http://code.chrisroberts.org/blog/2012/05/09/cooking-up-partial-run-lists-with-chef/
 
+## Forking and hacking on vagrant-vbox-snapshot
+
+```
+# fork vagrant-vbox-snapshot on github.com, and clone locally
+cd ~/code # or wherever you like to put coding projects
+git clone git@github.com/USERNAME/vagrant-vbox-snapshot.git
+cd vagrant-vbox-snapshot
+
+# create a new branch for your work
+git checkout -b FEATURE_NAME
+
+bundle install # not 100% sure this is necessary
+# hack away...
+# then test, possibly modifying Vagrantfile to suit scenario
+vagrant up 
+vagrant snapshot take TEST1  # and so on...
+
+# then commit, push, and create pull request
+```
+
 ## Reviewing a pull request
 
 ```

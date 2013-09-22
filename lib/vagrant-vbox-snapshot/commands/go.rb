@@ -57,7 +57,10 @@ module VagrantPlugins
 
             before_restore(vm_id)
 
-            system "VBoxManage controlvm #{vm_id} poweroff"
+            vm_info = `VBoxManage showvminfo #{vm_id} --machinereadable`
+            vm_state = vm_info.match(/^VMState="([a-z]+)".*/)[1]
+
+            system "VBoxManage controlvm #{vm_id} poweroff" if vm_state != 'poweroff'
             system "VBoxManage snapshot #{vm_id} restore #{snapshot_name}"
 
             if options[:reload]

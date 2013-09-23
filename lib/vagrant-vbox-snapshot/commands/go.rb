@@ -6,9 +6,9 @@ module VagrantPlugins
       class Go < Vagrant.plugin(2, :command)
         include MultiVmArgs
 
-        def get_shared_folders(vm_id)
+        def get_shared_folders(machine)
           shared_folders = []
-          info = `VBoxManage showvminfo #{vm_id} --machinereadable`
+          info = machine.provider.driver.execute("showvminfo", machine.id, "--machinereadable")
           info.split("\n").each do |line|
             if line =~ /^SharedFolderNameMachineMapping\d+="(.+?)"$/
               shared_folders << $1.to_s
@@ -17,14 +17,13 @@ module VagrantPlugins
           return shared_folders
         end
 
-        def before_restore(vm_id)
-          @shared_folders_before = get_shared_folders(vm_id)
+        def before_restore(machine)
+          @shared_folders_before = get_shared_folders(machine)
         end
 
-        def after_restore(vm_id)
-          @shared_folders_after = get_shared_folders(vm_id)
+        def after_restore(machine)
+          @shared_folders_after = get_shared_folders(machine)
           if @shared_folders_before != @shared_folders_after
-            missing_folders = @shared_folders_before - @shared_folders_after
             @env.ui.warn("Synced folders have changed after restoring snapshot. Consider running 'vagrant reload'.")
             @env.ui.warn("   Before restore: #{@shared_folders_before}")
             @env.ui.warn("    After restore: #{@shared_folders_after}")
@@ -55,7 +54,7 @@ module VagrantPlugins
           with_target_vms(vm_name, single_target: true) do |machine|
             vm_id = machine.id
 
-            before_restore(vm_id)
+            before_restore(machine)
 
             if machine.state.id != :poweroff
               @env.ui.info("Powering off machine #{vm_id}")
@@ -74,7 +73,7 @@ module VagrantPlugins
               machine.action(:up, :provision_enabled => false)
             end
 
-            after_restore(vm_id)
+            after_restore(machine)
           end
         end
       end

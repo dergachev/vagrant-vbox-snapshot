@@ -34,25 +34,38 @@ git push -u origin master
 
 ## Pushing out a new release of the gem
 
-```
-# make commits
-# consider creating/updating CHANGELOG.txt
-vim lib/vagrant-vbox-snapshot/version.rb +/VERSION # increment version counter, eg to 0.0.3
-gem build vagrant-vbox-snapshot.gemspec # creates vagrant-vbox-snapshot-0.0.3.gem
+Do a local build:
 
+```
+vim lib/vagrant-vbox-snapshot/version.rb +/VERSION # increment version counter, eg to 0.0.3
+gem build vagrant-vbox-snapshot.gemspec # creates vagrant-vbox-snapshot-0.0.3.gem  
+```
+
+Test the local build:
+
+```
 # test the gem locally, in a random vagrant project
 cd ~/code/screengif
 vagrant plugin uninstall vagrant-vbox-snapshot
-vagrant plugin install ~/code/vagrant-vbox-snapshot/vagrant-vbox-snapshot-0.0.3.gem
-# test it out, ensure basic sanity, eg for 0.0.3:
-vagrant snapshot list -h
-# cleanup
-vagrant plugin uninstall
+vagrant plugin install ~/code/vagrant-vbox-snapshot/vagrant-vbox-snapshot-VERSION.gem # replace VERSION with 0.0.3
+vagrant plugin list | grep snapshot   # ensure that correct version is installed
+vagrant snapshot list -h   # quick sanity check
+vagrant plugin uninstall    # cleanup
+```
 
-cd ~/code/vagrant-vbox-snapshot/
+Now commit and tag:
+
+
+```
+cd ~/code/vagrant-vbox-snapshot
+
+vim CHANGELOG.txt        # update CHANGELOG
+# git commit everything
+
 gem push vagrant-vbox-snapshot-0.0.3.gem
-git tag 0.0.3
+git tag vN.N.N     # eg v0.0.3
 git push --tags
+```
 
 # test installing from rubygems
 cd ~/code/screengif

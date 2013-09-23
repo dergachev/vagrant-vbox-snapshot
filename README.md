@@ -21,8 +21,6 @@ The following commands are added by this plugin:
 ## Caveats
 
 * Not compatible with Vagrant <1.1. If you need this, try [another solution](#other-solutions).
-* Only minimally tested.
-* Currently doesn't work under Windows. See [#12](https://github.com/dergachev/vagrant-vbox-snapshot/issues/12).
 
 ## Other solutions
 

@@ -57,16 +57,21 @@ module VagrantPlugins
 
             before_restore(vm_id)
 
-            system "VBoxManage controlvm #{vm_id} poweroff" if machine.state.id != :poweroff
-            system "VBoxManage snapshot #{vm_id} restore #{snapshot_name}"
+            if machine.state.id != :poweroff
+              @env.ui.info("Powering off machine #{vm_id}")
+              machine.provider.driver.execute("controlvm", machine.id, "poweroff")
+            end
+
+            machine.provider.driver.execute("snapshot", machine.id, "restore", snapshot_name) do |type, data|
+              machine.env.ui.info(data, :color => type == :stderr ? :red : :white, :new_line => false)
+            end
 
             if options[:reload]
-              @env.ui.info("Reloading VM")
+              @env.ui.info("Reloading VM, since --reload passed")
               machine.action(:reload, :provision_enabled => false)
             else
-              @env.ui.info("Starting VM from restored snapshot (#{snapshot_name})")
-              @logger.info("starting VM")
-              system "VBoxManage startvm #{vm_id} --type headless"
+              @env.ui.info("Starting restored VM")
+              machine.action(:up, :provision_enabled => false)
             end
 
             after_restore(vm_id)

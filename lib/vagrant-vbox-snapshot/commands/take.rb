@@ -22,8 +22,10 @@ module VagrantPlugins
           return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|
-            vm_id = machine.id
-            system "VBoxManage snapshot #{vm_id} take #{snapshot_name} --pause"
+            machine.env.ui.info("Taking snapshot #{snapshot_name}")
+            machine.provider.driver.execute("snapshot", machine.id, "take", snapshot_name, "--pause") do |type, data|
+              machine.env.ui.info(data, :color => type == :stderr ? :red : :white, :new_line => false)
+            end
           end
         end
       end

@@ -1,3 +1,6 @@
+# this command is very slow
+# consider removing it; or replacing with this idea: http://superuser.com/questions/590968/quickest-way-to-merge-snapshots-in-virtualbox
+
 require_relative 'multi_vm_args'
 
 module VagrantPlugins
@@ -10,7 +13,7 @@ module VagrantPlugins
           options = {}
 
           opts = OptionParser.new do |opts|
-            opts.banner = "Delete snapshot"
+            opts.banner = "Delete snapshot (warning: this is a very slow operation)"
             opts.separator ""
             opts.separator "Usage: vagrant snapshot delete [vm-name] <SNAPSHOT_NAME>"
           end
@@ -22,8 +25,9 @@ module VagrantPlugins
           return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|
-            vm_id = machine.id
-            system "VBoxManage snapshot #{vm_id} delete #{snapshot_name}"
+            machine.provider.driver.execute("snapshot", machine.id, "delete", snapshot_name) do |type, data|
+              machine.env.ui.info(data, :color => type == :stderr ? :red : :white)
+            end
           end
         end
       end

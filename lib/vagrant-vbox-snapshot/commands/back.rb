@@ -15,12 +15,22 @@ module VagrantPlugins
           return if !argv
 
           with_target_vms(argv, single_target: true) do |machine|
-            vm_id = machine.id
 
-            system "VBoxManage snapshot #{vm_id} list --details"
-            system "VBoxManage controlvm #{vm_id} poweroff" if machine.state.id != :poweroff
-            system "VBoxManage snapshot  #{vm_id} restorecurrent"
-            system "VBoxManage startvm   #{vm_id} --type headless"
+            if machine.state.id != :poweroff
+              machine.provider.driver.execute("controlvm", machine.id, "poweroff")
+            end
+
+            machine.provider.driver.execute("snapshot", machine.id, "restorecurrent") do |type, data|
+              machine.env.ui.info(data, :color => type == :stderr ? :red : :white, :new_line => false)
+            end
+
+            if options[:reload]
+              @env.ui.info("Reloading VM, since --reload passed")
+              machine.action(:reload, :provision_enabled => false)
+            else
+              @env.ui.info("Starting restored VM")
+              machine.action(:up, :provision_enabled => false)
+            end
           end
         end
       end

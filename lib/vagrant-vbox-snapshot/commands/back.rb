@@ -16,11 +16,9 @@ module VagrantPlugins
 
           with_target_vms(argv, single_target: true) do |machine|
             vm_id = machine.id
-            vm_info = `VBoxManage showvminfo #{vm_id} --machinereadable`
-            vm_state = vm_info.match(/^VMState="([a-z]+)".*/)[1]
 
             system "VBoxManage snapshot #{vm_id} list --details"
-            system "VBoxManage controlvm #{vm_id} poweroff" if vm_state != 'poweroff'
+            system "VBoxManage controlvm #{vm_id} poweroff" if machine.state.id != :poweroff
             system "VBoxManage snapshot  #{vm_id} restorecurrent"
             system "VBoxManage startvm   #{vm_id} --type headless"
           end

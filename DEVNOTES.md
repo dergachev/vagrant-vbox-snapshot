@@ -50,7 +50,7 @@ vagrant plugin uninstall vagrant-vbox-snapshot
 vagrant plugin install ~/code/vagrant-vbox-snapshot/vagrant-vbox-snapshot-VERSION.gem # replace VERSION with 0.0.3
 vagrant plugin list | grep snapshot   # ensure that correct version is installed
 vagrant snapshot list -h   # quick sanity check
-vagrant plugin uninstall    # cleanup
+vagrant plugin uninstall vagrant-vbox-snapshot   # cleanup
 ```
 
 Now commit and tag:
@@ -67,10 +67,11 @@ git tag vN.N.N     # eg v0.0.3
 git push --tags
 ```
 
-# test installing from rubygems
+Test installing from rubygems
+
+```
 cd ~/code/screengif
 vagrant plugin install vagrant-vbox-snapshot
-vagrant plugin list
 ```
 
 

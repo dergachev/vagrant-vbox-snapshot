@@ -29,7 +29,7 @@ This plugin is primarily a port of vagrant-snap to Vagrant 1.1.
 * [vagrant-snap](https://github.com/t9md/vagrant-snap)
   - fork with Vagrant 1.0.4-1.0.7 compatibility: https://gist.github.com/tombh/5142237 [source](https://github.com/mitchellh/vagrant/issues/143#issuecomment-14781762)
 * [sahara](https://github.com/jedi4ever/sahara)
-  - fork exists with 1.1 functionality: https://github.com/ryuzee/sahara
+  - supports 1.1 
 
 ## Development
 

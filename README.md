@@ -12,11 +12,11 @@ Ensure you have Vagrant 1.1+ installed, then run:
 
 The following commands are added by this plugin:
 
-     vagrant snapshot take [vm-name] [NAME]            # take snapshot, labeled by NAME
+     vagrant snapshot take [vm-name] <SNAPSHOT_NAME>   # take snapshot, labeled by NAME
      vagrant snapshot list [vm-name]                   # list snapshots
      vagrant snapshot back [vm-name]                   # restore last taken snapshot
-     vagrant snapshot delete [vm-name] [NAME]          # delete specified snapshot
-     vagrant snapshot go [vm-name] [NAME]              # restore specified snapshot
+     vagrant snapshot delete [vm-name] <SNAPSHOT_NAME> # delete specified snapshot
+     vagrant snapshot go [vm-name] <SNAPSHOT_NAME>     # restore specified snapshot
 
 ## Caveats
 

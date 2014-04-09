@@ -2,6 +2,10 @@ module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Root < Vagrant.plugin(2, :command)
+        def self.synopsis
+          "manages snapshots of the machine: taking, restoring, deleting, etc."
+        end
+
         def initialize(argv, env)
           super 
 

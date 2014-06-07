@@ -1,3 +1,9 @@
+## [0.0.5](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.4...v0.0.5) (June 7, 2014)
+
+IMPROVEMENTS:
+
+  - Add command synopsys [#23](https://github.com/dergachev/vagrant-vbox-snapshot/issues/23)
+
 ## [0.0.4](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.3...v0.0.4) (Sep 23, 2013)
 
 BACKWARDS INCOMPATIBILITIES:

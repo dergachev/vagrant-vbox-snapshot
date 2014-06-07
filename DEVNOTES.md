@@ -25,10 +25,19 @@ vagrant snapshot take TEST1  # and so on...
 ```
 git clone https://github.com/dergachev/vagrant-vbox-snapshot.git
 cd vagrant-vbox-snapshot
+
+# installs vagrant gem for local development
+NOKOGIRI_USE_SYSTEM_LIBRARIES=1 bundle install
+
 # consider branching if you aren't sure about merging it (not the case here, of course!)
-# git checkout dubious-pull-request
+# git checkout -b dubious-pull-request
 git pull https://github.com/fgrehm/vagrant-vbox-snapshot multi-vm-environments-support
-# test, fix stuff, etc
+
+# test, fix stuff, etc (inside the locally installed bundle)
+bundle exec vagrant up
+bundle exec vagrant snapshot go
+
+# push (merge into master if necessary)
 git push -u origin master
 ```
 

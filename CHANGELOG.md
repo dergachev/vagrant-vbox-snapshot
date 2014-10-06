@@ -1,3 +1,9 @@
+## [0.0.6](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.5...v0.0.6) (October 6, 2014)
+
+IMPROVEMENTS:
+
+  - suppress 'snapshot list' error when no snapshots [#17](https://github.com/dergachev/vagrant-vbox-snapshot/issues/17)
+
 ## [0.0.5](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.4...v0.0.5) (June 7, 2014)
 
 IMPROVEMENTS:

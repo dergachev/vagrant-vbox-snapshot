@@ -1,10 +1,12 @@
 require_relative 'multi_vm_args'
+require_relative 'check_runnable'
 
 module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Go < Vagrant.plugin(2, :command)
         include MultiVmArgs
+        include CheckRunnable
 
         def get_shared_folders(machine)
           shared_folders = []
@@ -52,6 +54,7 @@ module VagrantPlugins
           return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|
+            check_runnable_on(machine)
             vm_id = machine.id
 
             before_restore(machine)

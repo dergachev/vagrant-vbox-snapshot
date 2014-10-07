@@ -1,7 +1,12 @@
+require_relative 'multi_vm_args'
+require_relative 'check_runnable'
+
 module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Back < Vagrant.plugin(2, :command)
+        include CheckRunnable
+
         def execute
           options = {}
 
@@ -15,6 +20,7 @@ module VagrantPlugins
           return if !argv
 
           with_target_vms(argv, single_target: true) do |machine|
+            check_runnable_on(machine)
 
             if machine.state.id != :poweroff
               machine.provider.driver.execute("controlvm", machine.id, "poweroff")

@@ -1,10 +1,12 @@
 require_relative 'multi_vm_args'
+require_relative 'check_runnable'
 
 module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Take < Vagrant.plugin(2, :command)
         include MultiVmArgs
+        include CheckRunnable
 
         def execute
           options = {}
@@ -22,6 +24,7 @@ module VagrantPlugins
           return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|
+            check_runnable_on(machine)
             machine.env.ui.info("Taking snapshot #{snapshot_name}")
             machine.provider.driver.execute("snapshot", machine.id, "take", snapshot_name, "--pause") do |type, data|
               machine.env.ui.info(data, :color => type == :stderr ? :red : :white, :new_line => false)

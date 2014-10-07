@@ -2,12 +2,14 @@
 # consider removing it; or replacing with this idea: http://superuser.com/questions/590968/quickest-way-to-merge-snapshots-in-virtualbox
 
 require_relative 'multi_vm_args'
+require_relative 'check_runnable'
 
 module VagrantPlugins
   module VBoxSnapshot
     module Command
       class Delete < Vagrant.plugin(2, :command)
         include MultiVmArgs
+        include CheckRunnable
 
         def execute
           options = {}
@@ -25,6 +27,7 @@ module VagrantPlugins
           return if !snapshot_name
 
           with_target_vms(vm_name, single_target: true) do |machine|
+            check_runnable_on(machine)
             machine.provider.driver.execute("snapshot", machine.id, "delete", snapshot_name) do |type, data|
               machine.env.ui.info(data, :color => type == :stderr ? :red : :white)
             end

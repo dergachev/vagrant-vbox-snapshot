@@ -1,3 +1,9 @@
+## [0.0.7](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.6...v0.0.7) (October 7, 2014)
+
+IMPROVEMENTS:
+
+  - don't crash if vm is poweroff [#28](https://github.com/dergachev/vagrant-vbox-snapshot/issues/28)
+
 ## [0.0.6](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.5...v0.0.6) (October 6, 2014)
 
 IMPROVEMENTS:

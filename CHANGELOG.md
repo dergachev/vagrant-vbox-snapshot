@@ -1,3 +1,9 @@
+## [0.0.8](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.7...v0.0.8) (October 10, 2014)
+
+IMPROVEMENTS:
+
+  - make 'vagrant' dev dependency in Gemfile [#29](https://github.com/dergachev/vagrant-vbox-snapshot/issues/29)
+
 ## [0.0.7](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.6...v0.0.7) (October 7, 2014)
 
 IMPROVEMENTS:

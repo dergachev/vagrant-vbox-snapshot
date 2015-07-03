@@ -59,7 +59,7 @@ module VagrantPlugins
 
             before_restore(machine)
 
-            if machine.state.id != :poweroff
+            if machine.state.id != :poweroff and machine.state.id != :saved
               @env.ui.info("Powering off machine #{vm_id}")
               machine.provider.driver.execute("controlvm", machine.id, "poweroff")
             end

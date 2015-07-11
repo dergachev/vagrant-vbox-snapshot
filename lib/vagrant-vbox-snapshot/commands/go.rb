@@ -37,9 +37,9 @@ module VagrantPlugins
           options[:reload] = false
 
           opts = OptionParser.new do |opts|
-            opts.banner = "Go to specified snapshot"
+            opts.banner = "Restore (aka. go to) specified snapshot"
             opts.separator ""
-            opts.separator "Usage: vagrant snapshot go [vm-name] <SNAPSHOT_NAME>"
+            opts.separator "Usage: vagrant snapshot restore|go [vm-name] <SNAPSHOT_NAME>"
 
             opts.on("-r", "--reload", "Runs 'vagrant reload --no-provision' after restoring snapshot to ensure Vagrantfile config is applied.") do |reload|
               options[:reload] = reload

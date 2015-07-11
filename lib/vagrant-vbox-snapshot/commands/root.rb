@@ -24,6 +24,10 @@ module VagrantPlugins
             require_relative('go')
             Go
           end
+          @subcommands.register(:restore) do
+            require_relative('go')
+            Go
+          end
           @subcommands.register(:back) do
             require_relative('back')
             Back

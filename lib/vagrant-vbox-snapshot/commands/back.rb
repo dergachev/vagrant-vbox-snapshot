@@ -22,7 +22,7 @@ module VagrantPlugins
           with_target_vms(argv, single_target: true) do |machine|
             check_runnable_on(machine)
 
-            if machine.state.id != :poweroff and machine.state.id != :saved
+            if machine.state.id != :poweroff and machine.state.id != :saved and machine.state.id != :aborted
               machine.provider.driver.execute("controlvm", machine.id, "poweroff")
             end
 

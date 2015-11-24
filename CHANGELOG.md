@@ -1,3 +1,9 @@
+## [0.0.10](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.9...v0.0.10) (November 13, 2015)
+
+IMPROVEMENTS:
+
+- vagrant snapshot back and go no longer fails if the VM is in "aborted" state [#36](https://github.com/dergachev/vagrant-vbox-snapshot/pull/36)
+
 ## [0.0.9](https://github.com/dergachev/vagrant-vbox-snapshot/compare/v0.0.8...v0.0.9) (July 3, 2015)
 
 IMPROVEMENTS:

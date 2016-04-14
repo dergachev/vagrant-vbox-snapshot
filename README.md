@@ -2,6 +2,8 @@ vagrant-vbox-snapshot
 ==================================
 Vagrant plugin that exposes the `VBoxManage snapshot` command.
 
+As of Q4 2015, the [vagrant snapshot](https://www.vagrantup.com/docs/cli/snapshot.html) command is provided by core Vagrant. Consider using it in preference to this plugin.
+
 ## Install
 
 Ensure you have Vagrant 1.1+ installed, then run:
